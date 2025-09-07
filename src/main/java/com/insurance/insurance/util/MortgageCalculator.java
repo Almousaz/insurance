@@ -1,4 +1,4 @@
-package com.insurance.insurance;
+package com.insurance.insurance.util;
 
 public class MortgageCalculator {
 

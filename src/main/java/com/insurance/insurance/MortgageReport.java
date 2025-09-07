@@ -1,11 +1,13 @@
 package com.insurance.insurance;
 
+import com.insurance.insurance.util.MortgageCalculator;
+
 import java.text.NumberFormat;
 
 public class MortgageReport {
 
 
-    private  MortgageCalculator calculator;
+    private MortgageCalculator calculator;
 
     public MortgageReport(MortgageCalculator calculator) {
         this.calculator = calculator;
