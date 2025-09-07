@@ -6,9 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class InsuranceApplication {
 
-    final static byte MONTHS_IN_YEAR = 12;
-    final static byte PERCENT = 100;
-
 
     public static void main(String[] args) {
         SpringApplication.run(InsuranceApplication.class, args);

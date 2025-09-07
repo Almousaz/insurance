@@ -2,9 +2,20 @@ package com.insurance.insurance;
 
 public class MortgageCalculator {
 
-      private int principal;
-      private float annualInterest;
-      private byte years;
+    public final static byte MONTHS_IN_YEAR = 12;
+    public final static byte PERCENT = 100;
+
+    private int principal;
+    private float annualInterest;
+    private byte years;
+
+    public double[] getRemainingBalance() {
+        var balances = new double[getNumberOfPayments()];
+        for (short month = 1; month < balances.length ; month++) {
+            balances[month - 1] = calculateBalance(month);
+        }
+        return balances;
+    }
 
     public MortgageCalculator(int principal, float annualInterest, byte years) {
         this.principal = principal;
@@ -12,15 +23,13 @@ public class MortgageCalculator {
         this.years = years;
     }
 
-    public short getYears() {
-        return years;
-    }
+
 
     public  double calculateMortgage() {
 
 
-        float numberOfPayments = years * InsuranceApplication.MONTHS_IN_YEAR;
-        float monthlyInterest = annualInterest / InsuranceApplication.PERCENT / InsuranceApplication.MONTHS_IN_YEAR;
+        float numberOfPayments = getNumberOfPayments();
+        float monthlyInterest = getMonthlyInterest();
 
 
         double mortgage = principal * (monthlyInterest *
@@ -32,10 +41,14 @@ public class MortgageCalculator {
 
     }
 
+    private float getMonthlyInterest() {
+        return annualInterest / PERCENT / MONTHS_IN_YEAR;
+    }
+
     public  double calculateBalance(short numberOfPaymentsMade) {
 
-        float numberOfPayments = years * InsuranceApplication.MONTHS_IN_YEAR;
-        float monthlyInterest = annualInterest / InsuranceApplication.PERCENT / InsuranceApplication.MONTHS_IN_YEAR;
+        float numberOfPayments = getNumberOfPayments();
+        float monthlyInterest = getMonthlyInterest();
 
         double balance = principal *
                 (Math.pow(1 + monthlyInterest, numberOfPayments) -
@@ -44,5 +57,9 @@ public class MortgageCalculator {
         return balance;
 
 
+    }
+
+    private int getNumberOfPayments() {
+        return years * MONTHS_IN_YEAR;
     }
 }
